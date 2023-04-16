@@ -1,0 +1,11 @@
+{% if query %}
+  <h2>Search results for "{{ query }}"</h2>
+{% endif %}
+
+{% for product in products %}
+<div class="product">
+  <h3>{{ product.name }}</h3>
+  <p>{{ product.description }}</p>
+  <p>{{ product.price }}</p>
+</div>
+{% endfor %}
