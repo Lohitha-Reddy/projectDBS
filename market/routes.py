@@ -780,6 +780,15 @@ def shippingInfo():
     print(rows)
     return render_template('shippingInfo.html', results=rows)
 
+@app.route('/orders')
+def orders():
+    cur = my_sql.connection.cursor()
+    # cur.execute("delimiter $$ CREATE TRIGGER cal_shipping_date AFTER INSERT ON orders FOR EACH ROW BEGIN insert into shipping (order_id, shipping_date) values ((select max(order_id) from orders), (SELECT DATE_ADD(CURDATE(), INTERVAL  CASE WEEKDAY(CURDATE())  WHEN 4 THEN 6 WHEN 5 THEN 5  ELSE WEEKDAY(CURDATE())  END + 4 DAY) AS shipping_date)) END$$ delimeter")
+    cur.execute("select * from orders")
+    rows = cur.fetchall()
+    print(rows)
+    return render_template('orders.html', rows=rows)
+
 @app.route('/show_restocking')
 def show_restocking():
     # show_restocking query
