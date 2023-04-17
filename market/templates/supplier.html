@@ -29,12 +29,14 @@
         <tr>
             <th>Supplier ID</th>
             <th>Inventory ID</th>
+            <th>Supplier Name</th>
             <th>Action</th>
         </tr>
         {% for row in rows %}
             <tr>
                 <td>{{ row[0] }}</td>
                 <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
                 <td>
                     <a class="btn btn-primary" href="/update_supplier/{{ row[0] }}">Update</a>
                     <a class="btn btn-danger" href="/delete_supplier/{{ row[0] }}">Delete</a>

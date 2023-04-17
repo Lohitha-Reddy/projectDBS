@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><!DOCTYPE html>
+<html>
+<head>
+    <title>Shipping Table</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Shipping ID</th>
+                <th>Order ID</th>
+                <th>Shipping Date</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
