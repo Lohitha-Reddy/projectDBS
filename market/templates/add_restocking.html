@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+  Seller Panel
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ADD Quantity</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-3">ADD Quantity</h1>
+        <form method="POST" action="/add_restocking">
+            <div class="form-group">
+                <label for="inventory_id">Inventory_id:</label>
+                <input type="text" class="form-control" id="inventory_id" name="inventory_id" >
+            </div>
+
+            <div class="form-group">
+                <label for="restocking_id">Restocking_id:</label>
+                <input type="text" class="form-control" id="restocking_id" name="restocking_id" >
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="text" class="form-control" id="quantity" name="quantity" >
+            </div>
+
+            <div class="form-group">
+                <label for="supplier_id">Supplier_id:</label>
+                <input type="supplier_id" class="form-control" id="supplier_id" name="supplier_id" >
+            </div>
+
+            <button type="submit"class="btn btn-primary" >ADD Quantity</button>
+            <!-- <a href="/" class="btn btn-secondary">Cancel</a> -->
+            <!-- <a href="/delete_customer/{{cust_id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete Customer</a> -->
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+{% endblock %}

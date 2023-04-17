@@ -7,14 +7,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Customer</title>
+    <title>Register Customer</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5 mb-3">Add Customer</h1>
-        <form method="POST" action="/add_customer">
+        <h1 class="mt-5 mb-3">Register Customer</h1>
+        <form method="POST" action="/registerCustomer">
             <div class="form-group">
                 <label for="cust_id">Cust_ID:</label>
                 <input type="text" class="form-control" id="cust_id" name="cust_id"  readonly>
@@ -58,7 +58,7 @@
                 <input type="password" class="form-control" id="password" name="password" >
             </div>
 
-            <button type="submit"class="btn btn-primary" >ADD Customer</button>
+            <button type="submit"class="btn btn-primary" > Submit</button>
             <!-- <a href="/" class="btn btn-secondary">Cancel</a> -->
             <!-- <a href="/delete_customer/{{cust_id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete Customer</a> -->
         </form>

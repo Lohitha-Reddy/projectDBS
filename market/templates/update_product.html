@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}
+  Seller Panel
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Product</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-3">Update Product</h1>
+        <form method="POST" action="/update_product/{{ row[0] }}">
+            <div class="form-group">
+                <label for="prod_id">Prod_ID:</label>
+                <input type="text" class="form-control" id="prod_id" name="prod_id" value="{{ row[0] }}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Product Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ row[1] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <input type="text" class="form-control" id="category" name="category" value="{{ row[2] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" name="price" value="{{ row[3] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="min_quantity">Min_quantity:</label>
+                <input type="number" class="form-control" id="min_quantity" name="min_quantity" value="{{ row[4] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="inventory_id">inventory_id:</label>
+                <input type="number" class="form-control" id="inventory_id" name="inventory_id" value="{{ row[5] }}">
+            </div>
+
+
+            <button type="submit"class="btn btn-primary" >Update Product</button>
+            <!-- <a href="/" class="btn btn-secondary">Cancel</a> -->
+            <!-- <a href="/delete_customer/{{cust_id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete Customer</a> -->
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+{% endblock %}

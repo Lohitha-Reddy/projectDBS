@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+  Seller Panel
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<style>
+   .container{
+    background-color: white;
+   }
+   .nav-add{
+    
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+   }
+   h1{
+    color: black;
+   }
+</style>
+<body>
+    <div class="container">
+        <div class="nav-add">
+                <button class="btn btn-primary" onclick="window.location.href='/add_newproduct'">Add Product</button>
+        </div>
+     
+        <h1 class="my-4">Products Table</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Prod_ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Min_quantity</th>
+                <th>Inventory_ID</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td><a class="btn btn-primary" href="/update_product/{{ row[0] }}">Update</a></td>
+                <td><a class="btn btn-danger" href="/delete_product/{{ row[0] }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+   
+
+    
+</body>
+</html>
+
+{% endblock %}
+

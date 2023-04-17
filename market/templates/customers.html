@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}
+  Seller Panel
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<style>
+   .container{
+    background-color: white;
+   }
+   .nav-add{
+    
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+   }
+   h1{
+    color: black;
+   }
+</style>
+<body>
+    <div class="container">
+        <div class="nav-add">
+                <button class="btn btn-primary" onclick="window.location.href='/add_newcustomer'">Add Customer</button>
+        </div>
+     
+        <h1 class="my-4">Customer Table</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Cust_ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile</th>
+                <th>Email_ID</th>
+                <th>Address</th>
+                <th>Zipcode</th>
+                <!-- <th>Username</th> -->
+                <!-- <th>Password</th> -->
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td><a class="btn btn-primary" href="/update_customer/{{ row[0] }}">Update</a></td>
+                <td><a class="btn btn-danger" href="/delete_customer/{{ row[0] }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+   
+
+    
+</body>
+</html>
+
+{% endblock %}
+

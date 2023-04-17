@@ -1,0 +1,39 @@
+<div>
+{% extends 'base.html' %} {% block title %} Welcome to onlineStore {% endblock
+    %} {% block content %}
+    <div class="container-fuild">
+        <h1>My Cart</h1>
+        <div class="nav-add">
+            <button class="btn btn-primary" onclick="window.location.href='/checkout?cust_id={{cust_id}}'">Checkout</button>
+        </div>
+      <div class="row" style="margin-left: 20px;">
+        <!-- {% set userID = userID %} -->
+       
+        {% for dict in products%}
+        <div class="col-2.4">
+          <div class="card" style="width: 15rem;margin: 5px;">
+            <img class="card-img-top" src="https://picsum.photos/100" alt="Card image cap"/>
+            <div class="card-body">
+              <h5 class="card-title text-primary">Name: {{dict.name}}</h5>
+              <h5 class="card-title text-success">Category: {{dict.category}}</h5>
+              <h5 class="card-title text-danger">Price: $ {{dict.price}}</h5>
+              <form action="/add_to_wish_list?prod_id={{dict.prod_id}}" method="POST">
+                <input type="hidden" name="name" value="{{dict.name}}">
+                <input type="hidden" name="category" value="{{dict.category}}">
+                <input type="hidden" name="price" value="{{dict.price}}">
+                <input type="hidden" name="prod_id" value="{{dict.prod_id}}">
+                <input type="hidden" name="cust_id" value="{{cust_id}}">
+                <!-- <button type="submit" class="btn btn-primary" >Add to MyWishlist</button> -->
+                
+              </form>
+              <!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+            </div>
+           
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      
+      {% endblock %}    
+    </div>
+    
