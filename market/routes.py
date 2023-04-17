@@ -176,10 +176,10 @@ def userEnter(cust_id):
     cur = my_sql.connection.cursor()
     query = request.args.get('query')
     products=[]
-    product_list = cur.execute("SELECT * FROM product")
+    product_list = cur.execute("SELECT * FROM product_view")
     if query:
         cur =my_sql.connection.cursor()
-        product_list =cur.execute("SELECT * FROM product where name like '%"+query+"%'")
+        product_list =cur.execute("SELECT * FROM product_view where name like '%"+query+"%'")
         # result = cur.fetchall()
         products = product_list
     if product_list>0:
@@ -197,7 +197,7 @@ def userEnter(cust_id):
                     my_list.append(temp_dict)  
     if query:
         cur =my_sql.connection.cursor()
-        product_list =cur.execute("SELECT * FROM product where category like '%"+query+"%'")
+        product_list =cur.execute("SELECT * FROM product_view where category like '%"+query+"%'")
         # result = cur.fetchall()
         products = product_list
     if product_list>0:
@@ -266,7 +266,7 @@ def placeOrder(user_id):
         for item in customer_cart_list:
             product_name = item['Name']
             cur = my_sql.connection.cursor()
-            prod_list = cur.execute("SELECT * FROM product")
+            prod_list = cur.execute("SELECT * FROM product_view")
             if prod_list>0:
                 prod_all = cur.fetchall()
                 id = -1
@@ -592,7 +592,7 @@ def delete_customer(cust_id):
 
 @app.route('/products')
 def products():
-    query = "SELECT * FROM product"
+    query = "SELECT * FROM product_view"
     cur =my_sql.connection.cursor()
     cur.execute(query)
     rows = cur.fetchall()
@@ -607,7 +607,7 @@ def products():
 def update_product(prod_id):
     # retrieve user data from the database
     cur =my_sql.connection.cursor()
-    cur.execute("SELECT * FROM product WHERE prod_id = %s", (prod_id,))
+    cur.execute("SELECT * FROM product_view WHERE prod_id = %s", (prod_id,))
     user = cur.fetchone()
     # handle form submission
     if request.method == 'POST':
@@ -827,7 +827,7 @@ def add_to_wish_list():
 def cart():
     cur = my_sql.connection.cursor()
     cust_id = request.args.get('cust_id')
-    cur.execute("SELECT DISTINCT * FROM cart join product using(prod_id)")
+    cur.execute("SELECT DISTINCT * FROM cart join product_view using(prod_id)")
     rows = cur.fetchall()
     my_list=[]
     products =rows
@@ -849,7 +849,7 @@ def cart():
 def checkout():
     cur = my_sql.connection.cursor()
     cust_id = request.args.get('cust_id')
-    cur.execute("SELECT DISTINCT * FROM cart join product using(prod_id)")
+    cur.execute("SELECT DISTINCT * FROM cart join product_view using(prod_id)")
     rows = cur.fetchall()
     quantity=1
     my_list=[]
@@ -880,7 +880,7 @@ def checkout():
 def wishlist():
     cur = my_sql.connection.cursor()
     cust_id = request.args.get('cust_id')
-    cur.execute("select DISTINCT * from wish_list left join product using(prod_id)")
+    cur.execute("select DISTINCT * from wish_list left join product_view using(prod_id)")
     rows = cur.fetchall()
     my_list=[]
     products =rows
