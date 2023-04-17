@@ -749,6 +749,28 @@ def restocking():
     rows = cur.fetchall()
     return render_template('restocking.html', results=rows)
 
+@app.route('/inactiveCustomers')
+def inactiveCustomers():
+    # inactive query
+    cur = my_sql.connection.cursor()
+    # cur.execute("select c.cust_id, concat(c.first_name, ' ', c.last_name) as customer_name, o.ordered_at as last_ordered_on from customer c join orders o on c.cust_id = o.cust_id where datediff(current_timestamp, o.ordered_at)>=30")
+    cur.execute("select c.cust_id, concat(c.first_name, ' ', c.last_name) as customer_name, o.ordered_at as last_ordered_on from customer c join orders o on c.cust_id = o.cust_id ")
+    # cur.execute("select i.inactive_id, p.name as Product_name, i.quantity from inactive i join product p using(inactive_id)")
+    rows = cur.fetchall()
+    print(rows)
+    return render_template('inactiveCustomers.html', results=rows)
+
+@app.route('/inactiveProducts')
+def inactiveProducts():
+    # inactive query
+    cur = my_sql.connection.cursor()
+    # cur.execute("select c.cust_id, concat(c.first_name, ' ', c.last_name) as customer_name, o.ordered_at as last_ordered_on from customer c join orders o on c.cust_id = o.cust_id where datediff(current_timestamp, o.ordered_at)>=30")
+    cur.execute("select i.inventory_id, p.name as Product_name, i.quantity from inventory i join product p on i.inventory_id = p.inventory_id join orders o on p.prod_id = o.prod_id ")
+    # cur.execute("select i.inactive_id, p.name as Product_name, i.quantity from inactive i join product p using(inactive_id)")
+    rows = cur.fetchall()
+    print(rows)
+    return render_template('inactiveProducts.html', results=rows)
+
 @app.route('/show_restocking')
 def show_restocking():
     # show_restocking query
@@ -872,6 +894,10 @@ def checkout():
         cur.execute("INSERT INTO orders(cust_id,prod_id,quantity) VALUES( %s, %s, %s)",(cust_id,list["prod_id"],quantity))
         my_sql.connection.commit()
         cur.close()
+        cur = my_sql.connection.cursor()
+        cur.execute("truncate table cart")
+        my_sql.connection.commit()
+        cur.close()
         url_direct = '/home'+'/'+str(cust_id)
         return redirect(url_direct)
     return render_template('cart.html', products=my_list,cust_id=cust_id)
@@ -898,21 +924,4 @@ def wishlist():
     print(my_list)
     return render_template('wishlist.html', products=my_list,cust_id=cust_id)
 
-# @app.route('/update_cart', methods=['POST'])
-# def update_cart():
-#     product_id = request.form['product_id']
-#     quantity = request.form['quantity']
-#     cart = session.get('cart', {})
-#     cart[product_id] = int(quantity)
-#     session['cart'] = cart
-#     return redirect('/cart')
-
-# @app.route('/remove_from_cart', methods=['POST'])
-# def remove_from_cart():
-#     product_id = request.form['product_id']
-#     cart = session.get('cart', {})
-#     if product_id in cart:
-#         del cart[product_id]
-#     session['cart'] = cart
-#     return redirect('/cart')
 

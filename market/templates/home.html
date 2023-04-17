@@ -15,6 +15,7 @@
             <h5 class="card-title text-primary">Name: {{dict.name}}</h5>
             <h5 class="card-title text-success">Category: {{dict.category}}</h5>
             <h5 class="card-title text-danger">Price: $ {{dict.price}}</h5>
+            <h5 class="card-title text-danger">Rating 1/5</h5>
             <form action="/add_to_cart?cust_id={{cust_id}}" method="POST">
               <input type="hidden" name="name" value="{{dict.name}}">
               <input type="hidden" name="category" value="{{dict.category}}">
