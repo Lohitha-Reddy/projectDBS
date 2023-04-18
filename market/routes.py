@@ -495,7 +495,7 @@ class StaticClass:
 
 @app.route('/customers')
 def users():
-    query = "SELECT * FROM project.customer"
+    query = "SELECT * FROM project.customer_view"
     cur =my_sql.connection.cursor()
     cur.execute(query)
     rows = cur.fetchall()
@@ -744,8 +744,8 @@ def inventory():
 def restocking():
     # restocking query
     cur = my_sql.connection.cursor()
-    cur.execute("select i.inventory_id, p.name as Product_name, i.quantity,i.min_quantity from inventory i join product p using(inventory_id) having quantity")
-    # cur.execute("select i.restocking_id, p.name as Product_name, i.quantity from restocking i join product p using(restocking_id)")
+    # cur.execute("select i.inventory_id, p.name as Product_name, i.quantity,i.min_quantity from inventory i join product p using(inventory_id) having quantity")
+    cur.execute("select i.restocking_id, p.name as Product_name, i.quantity from restocking i join product p using(restocking_id)")
     rows = cur.fetchall()
     return render_template('restocking.html', results=rows)
 
@@ -764,8 +764,8 @@ def inactiveCustomers():
 def inactiveProducts():
     # inactive query
     cur = my_sql.connection.cursor()
-    # cur.execute("select c.cust_id, concat(c.first_name, ' ', c.last_name) as customer_name, o.ordered_at as last_ordered_on from customer c join orders o on c.cust_id = o.cust_id where datediff(current_timestamp, o.ordered_at)>=30")
-    cur.execute("select i.inventory_id, p.name as Product_name, i.quantity from inventory i join product p on i.inventory_id = p.inventory_id join orders o on p.prod_id = o.prod_id ")
+    cur.execute("select c.cust_id, concat(c.first_name, ' ', c.last_name) as customer_name, o.ordered_at as last_ordered_on from customer c join orders o on c.cust_id = o.cust_id where datediff(current_timestamp, o.ordered_at)>=30")
+    # cur.execute("select i.inventory_id, p.name as Product_name, i.quantity from inventory i join product p on i.inventory_id = p.inventory_id join orders o on p.prod_id = o.prod_id ")
     # cur.execute("select i.inactive_id, p.name as Product_name, i.quantity from inactive i join product p using(inactive_id)")
     rows = cur.fetchall()
     print(rows)
