@@ -1,58 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}
+  Seller Panel
+{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Suppliers</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2
-        }
-        form {
-            display: inline-block;
-        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
+<style>
+   .container{
+    background-color: white;
+   }
+   .nav-add{
+    
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+   }
+   h1{
+    color: black;
+   }
+</style>
 <body>
-    <h1>Suppliers</h1>
-    <table>
-        <tr>
-            <th>Supplier ID</th>
-            <th>Inventory ID</th>
-            <th> Supplier Name</th>
-            <th>Action</th>
-        </tr>
-        {% for row in rows %}
-            <tr>
-                <td>{{ row[0] }}</td>
-                <td>{{ row[1] }}</td>
-                <td>{{ row[2] }}</td>
-                <td>
-                    <a class="btn btn-primary" href="/update_supplier/{{ row[0] }}">Update</a>
-                    <a class="btn btn-danger" href="/delete_supplier/{{ row[0] }}">Delete</a>
-                <td>
-                    <!-- <form action="/delete_supplier/{{ row[0] }}" method="GET">
-                        <input type="submit" value="Delete">
-                    </form> -->
-                    <!-- <form action="/update_supplier" method="POST">
-                        <input type="hidden" name="supplier_id" value="{{ row[0] }}">
-                        <input type="text" name="inventory_id" value="{{ row[1] }}">
-                        <input type="submit" value="Update">
-                    </form> -->
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+     
+     
+        <h1 class="my-4">Shipping Info</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Supplier ID</th>
+                    <th>Inventory ID</th>
+                    <th> Supplier Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/update_supplier/{{ row[0] }}">Update</a>
+                        <a class="btn btn-danger" href="/delete_supplier/{{ row[0] }}">Delete</a>
+                    <td>
+                       
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
    
+
+    
 </body>
 </html>
+
+{% endblock %}
+
